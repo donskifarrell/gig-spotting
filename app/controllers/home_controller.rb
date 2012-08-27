@@ -7,7 +7,8 @@ class HomeController < ApplicationController
 	# GET /index
 	# GET /index.json
 	def index
-		$log.info "Index"
+		$log.info "HomeController -> Index"
+=begin
 
 		if params.include? :artist 
 			@search = Search.new(
@@ -33,5 +34,7 @@ class HomeController < ApplicationController
 			format.html
 			format.js  {render :content_type => 'text/javascript'}
 		end 
+=end
+
 	end
 end

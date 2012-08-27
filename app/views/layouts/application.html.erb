@@ -1,14 +1,39 @@
 <!DOCTYPE html>
 <html>
 <head>
-  <title>GigSpotting</title>
-  <%= stylesheet_link_tag    "application", :media => "all" %>
-  <%= javascript_include_tag "application" %>
-  <%= csrf_meta_tags %>
+  	<title>GigSpotting</title>
+  	<meta name="viewport" content="width=device-width, initial-scale=1.0"> 
+  	<link rel="stylesheet" href="http://cdn.leafletjs.com/leaflet-0.4.4/leaflet.css" />
+	<!--[if lte IE 8]>
+	    <link rel="stylesheet" href="http://cdn.leafletjs.com/leaflet-0.4.4/leaflet.ie.css" />
+	<![endif]-->
+	<script src="http://cdn.leafletjs.com/leaflet-0.4.4/leaflet.js"></script>
+
+	<%= stylesheet_link_tag    "application", :media => "all" %>
+	<%= javascript_include_tag "application" %>
+	<%= csrf_meta_tags %>
 </head>
 <body>
-
-<%= yield %>
-
+	<div class="navbar navbar-fixed-top">
+		<div class="navbar-inner">
+			<a class="brand" href="#"> Gig-Spotting</a>
+			<ul class="nav">
+				<form class="navbar-form pull-left">
+				  <input type="text" class="span2" placeholder="Artist..">
+				  <input type="text" class="span2" placeholder="Location..">
+				  From: <input class="srchDate" id="srchFromDate" type="text" class="span2" placeholder="Date.." data-date-format="dd/mm/yy">
+				  To: <input class="srchDate" id="srchToDate" type="text" class="span2" placeholder="Date.." data-date-format="dd/mm/yy">
+				  <button type="submit" class="btn">Search</button>
+				</form>
+			</ul>
+		</div>
+	</div>
+	<div class="container-fluid">
+		<div class="row-fluid"> 
+	 		<div class="span12">
+	  			<%= yield %>
+	  		</div>
+	  	</div>
+	</div>
 </body>
 </html>

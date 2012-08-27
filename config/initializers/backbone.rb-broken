@@ -1,0 +1,2 @@
+# Stops Rails from sending root in JSON responses, which confuses backbone.
+ActiveRecord::Base.include_root_in_json = false
