@@ -1,0 +1,6 @@
+<div id="gigMarker">
+	<div class="popart"><img class="popimg" src="<%= @imgsrc %>"><img></div>
+	<div class="poptxt"><b><%= @artist %><b></div>
+	<div class="poptxt"><%= @date %></div>
+	<div class="poptxt"><b>Click for more detail</b></div>
+</div>
