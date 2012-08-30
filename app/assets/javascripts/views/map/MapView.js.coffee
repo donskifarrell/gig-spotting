@@ -1,19 +1,12 @@
 class GigSpotting.Views.MapView extends Backbone.View
-	el: $('#map')
+	el: '#map'
 
 	initialize: ->
 		$(window).on('resize', this.resize)		
 		this.render()
 
-	styleMarkerPopups: ->
-		$('.leaflet-popup-content-wrapper')
-			.hover(
-	            -> $(this).addClass("popup-hover"),
-	            -> $(this).removeClass("popup-hover")
-	        )
-
 	render: ->		
-		this.$el.css('z-index', -100)
+		this.$(this.el).css('z-index', -100)
 		this.initMap()
 
 	initMap: (options) ->
@@ -28,10 +21,17 @@ class GigSpotting.Views.MapView extends Backbone.View
 		leafmap.on('popupopen', this.styleMarkerPopups);
 		leafmap.addLayer(new L.Marker(["51.528" , "-0.13"]))
 
+	styleMarkerPopups: ->
+		$('.leaflet-popup-content-wrapper')
+			.hover(
+	            -> $(this).addClass("popup-hover"),
+	            -> $(this).removeClass("popup-hover")
+	        )
+
 	resize: ->
 		h = $(window).height()
 		offsetTop = 60
-		this.$el.css('height', (h - offsetTop))
+		this.$(this.el).css('height', (h - offsetTop))
 
 	remove: ->
 		# unbind the namespaced event (to prevent accidentally unbinding some
@@ -42,15 +42,3 @@ class GigSpotting.Views.MapView extends Backbone.View
 		Backbone.View.prototype.remove.call(this)
 		# could also be written as:
 		# this.constructor.__super__.remove.call(this);
-
-	addGig: (newGig) ->
-		gig = new GigSpotting.Views.GigsIndex({model: newGig})
-		this._GigViews[newGig.get('id')] = gig
-		gig.render()
-
-	renderGig: (gig) ->
-		marker = new L.Marker(gig.markerLocation)
-		marker
-			.bindPopup(new GigSpotting.Views.GigsIndex({model: gig}).el)
-			.on('mouseover', -> marker.openPopup())
-		this.leafmap.addLayer(marker)
