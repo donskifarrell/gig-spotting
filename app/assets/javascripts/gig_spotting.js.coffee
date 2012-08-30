@@ -23,9 +23,8 @@ window.GigSpotting =
   		})
 
   	# Views
-  	new GigSpotting.Views.MapsIndex({collection: gigs})
-  	new GigSpotting.Views.NavbarsIndex
-  	new GigSpotting.Views.GigsIndex
+  	new GigSpotting.Views.MapView({collection: gigs})
+  	new GigSpotting.Views.NavBarView
 
 $(document).ready ->
   GigSpotting.init('hihi')
