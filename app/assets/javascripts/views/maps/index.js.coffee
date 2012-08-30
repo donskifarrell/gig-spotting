@@ -1,6 +1,7 @@
 class GigSpotting.Views.MapsIndex extends Backbone.View
 	el: $('#map')
 	template: JST['maps/index']
+	leafmap: new L.Map('map')
 
 	initialize: ->
 		this._GigViews = {}
@@ -25,18 +26,18 @@ class GigSpotting.Views.MapsIndex extends Backbone.View
 		marker
 			.bindPopup(new GigSpotting.Views.GigsIndex({model: gig}).el)
 			.on('mouseover', -> marker.openPopup())
-		this.map.addLayer(marker)
+		this.leafmap.addLayer(marker)
 
 	initMap: ->
-		this.map = new L.Map('map')
 		tiling = new L.TileLayer('http://{s}.tile.cloudmade.com/a84f13b2f3934d29b04ff6722e9492c3/997/256/{z}/{x}/{y}.png', 
 		{
 			attribution: 'Map data &copy; <a href="http://openstreetmap.org">OpenStreetMap</a> contributors, <a href="http://creativecommons.org/licenses/by-sa/2.0/">CC-BY-SA</a>, Imagery © <a href="http://cloudmade.com">CloudMade</a>[…]',
 			maxZoom: 18
 		})
 		london = new L.LatLng(51.505, -0.09)
-		this.map.setView(london, 13).addLayer(tiling)
-		this.map.on('popupopen', this.styleMarkerPopups);
+		this.leafmap.setView(london, 13).addLayer(tiling)
+		this.leafmap.on('popupopen', this.styleMarkerPopups);
+		this.leafmap.addLayer(new L.Marker(["51.528" , "-0.13"]))
 
 	addGig: (newGig) ->
 		gig = new GigSpotting.Views.GigsIndex({model: newGig})
