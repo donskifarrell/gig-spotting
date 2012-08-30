@@ -3,29 +3,32 @@ window.GigSpotting =
   Collections: {}
   Views: {}
   Routers: {}
-  init: (data) -> 
-  	# Collections
-  	gigs = new GigSpotting.Collections.Gigs
+  init: -> 
+    # Models
+    map = new GigSpotting.Models.Map
 
-  	# temp data
-  	gigs.add({
-  		artist: 'Radiohead'
-  		location: 'London'
-  		})
-  	gigs.add({
-  		artist: 'Blur'
-  		location: 'Belfast'
-  		details: 'mancs'
-  		})
-  	gigs.add({
-  		location: 'Belfast'
-  		details: 'maaaaa'
-  		})
+    # Collections
+    gigs = new GigSpotting.Collections.Gigs
 
-  	# Views
-  	new GigSpotting.Views.MapView({collection: gigs})
-  	new GigSpotting.Views.NavBarView
+    # temp data
+    gigs.add({
+      artist: 'Radiohead'
+      location: 'London'
+    })
+    gigs.add({
+      artist: 'Blur'
+      location: 'Belfast'
+      details: 'mancs'
+    })
+    gigs.add({
+      location: 'Belfast'
+      details: 'maaaaa'
+    })
+
+    # Views
+    new GigSpotting.Views.MapView({ model: map })
+    new GigSpotting.Views.NavBarView
 
 $(document).ready ->
-  GigSpotting.init('hihi')
+  GigSpotting.init()
   $(window).resize()
