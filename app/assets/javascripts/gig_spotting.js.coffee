@@ -14,11 +14,13 @@ window.GigSpotting =
     gigs.add({
       artist: 'Radiohead'
       location: 'London'
+      markerLocation: [51.505, -0.09]
     })
     gigs.add({
       artist: 'Blur'
       location: 'Belfast'
       details: 'mancs'
+      markerLocation: [51.505, -0.01]
     })
     gigs.add({
       location: 'Belfast'
@@ -27,6 +29,7 @@ window.GigSpotting =
 
     # Views
     new GigSpotting.Views.MapView({ model: map })
+    new GigSpotting.Views.GigsView({ model: map, collection: gigs })
     new GigSpotting.Views.NavBarView
 
 $(document).ready ->

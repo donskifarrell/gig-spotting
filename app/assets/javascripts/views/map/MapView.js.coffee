@@ -9,7 +9,7 @@ class GigSpotting.Views.MapView extends Backbone.View
 		this.$(this.el).css('z-index', -100)
 		this.initMap()
 
-	initMap: (options) ->
+	initMap: ->
 		leafmap = this.model.get('leafMap')
 		tiling = new L.TileLayer('http://{s}.tile.cloudmade.com/a84f13b2f3934d29b04ff6722e9492c3/997/256/{z}/{x}/{y}.png', 
 		{
