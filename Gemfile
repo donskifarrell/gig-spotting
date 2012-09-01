@@ -28,6 +28,9 @@ gem 'simple_form'
 gem 'json'
 gem 'httparty'
 
+# songkick api
+gem 'songkickr'
+
 group :test do
   gem "rspec"
   gem "rspec-rails"

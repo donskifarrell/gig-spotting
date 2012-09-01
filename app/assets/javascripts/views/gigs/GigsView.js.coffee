@@ -2,7 +2,7 @@ class GigSpotting.Views.GigsView extends Backbone.View
 	el: '.leaflet-popup-pane'
 	
 	events:
-		"dblclick": "open"
+		"click": "open"
 
 	initialize: ->
 		_(this).bindAll('add');
@@ -26,3 +26,6 @@ class GigSpotting.Views.GigsView extends Backbone.View
 	add: (model) ->
 		alert "Addededeed"
 		this.render()
+
+	open: ->
+		alert "Open"
