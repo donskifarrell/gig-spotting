@@ -21,13 +21,31 @@
 		<div class="navbar-inner">
 			<a class="brand" href="#"> Gig-Spotting</a>
 			<ul class="nav">
-				<form class="navbar-form pull-left">
-				  <input type="text" class="span2" placeholder="Artist..">
-				  <input type="text" class="span2" placeholder="Location..">
-				  From: <input class="srchDate" id="srchFromDate" type="text" class="span2" placeholder="Date.." data-date-format="dd/mm/yy">
-				  To: <input class="srchDate" id="srchToDate" type="text" class="span2" placeholder="Date.." data-date-format="dd/mm/yy">
-				  <button type="submit" class="btn">Search</button>
-				</form>
+				<%= form_tag @index, :remote => true, :method => :get, :class => "navbar-form pull-left" do %>
+		        <%= text_field_tag :artist, 
+		                            params[:artist], 
+		                            :class => 'span2', 
+		                            :placeholder => "Artist..." %>
+		        <%= text_field_tag :location, 
+		                            params[:location], 
+		                            :class => 'span2', 
+		                            :placeholder => "Location..."%>
+		        From: <%= text_field_tag :date, 
+		                            params[:date], 
+		                            :class => 'span2 srchDate', 
+		                            :id => 'srchFromDate',
+		                            :placeholder => "Date..." %>
+		        To: <%= text_field_tag :date, 
+		                            params[:date], 
+		                            :class => 'span2 srchDate', 
+		                            :id => 'srchToDate',
+		                            :placeholder => "Date..." %>
+		        <%= submit_tag  "",
+		                        :id => 'searchbtn', 
+		                        :name => nil, 
+		                        :value => 'Search', 
+		                        :class => 'btn submittable'%>  
+		        <% end %>
 			</ul>
 		</div>
 	</div>
