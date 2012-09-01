@@ -1,5 +1,5 @@
 class GigSpotting.Views.GigsView extends Backbone.View
-	el: 'leaflet-popup-pane'
+	el: '.leaflet-popup-pane'
 	
 	events:
 		"dblclick": "open"
@@ -16,9 +16,10 @@ class GigSpotting.Views.GigsView extends Backbone.View
 		this.model.get('leafMap').addLayer(this.generateMarker(gig))
 
 	generateMarker: (gig) ->
+		gigRender =  new GigSpotting.Views.GigView({model: gig}).render()
 		marker = new L.Marker(gig.get('markerLocation'))
 		marker
-			.bindPopup(new GigSpotting.Views.GigView({model: gig}).render())
+			.bindPopup(gigRender)
 			.on('mouseover', -> marker.openPopup())
 		return marker
 
