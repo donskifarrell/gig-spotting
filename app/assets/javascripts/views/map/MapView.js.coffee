@@ -18,8 +18,8 @@ class GigSpotting.Views.MapView extends Backbone.View
 		})
 		london = new L.LatLng(51.505, -0.09)
 		leafmap.setView(london, 13).addLayer(tiling)
-		leafmap.on('popupopen', this.styleMarkerPopups);
-		leafmap.addLayer(new L.Marker(["51.528" , "-0.13"]))
+		leafmap.on('popupopen', this.styleMarkerPopups)
+		#leafmap.addLayer(new L.Marker(["51.528" , "-0.13"]))
 
 	styleMarkerPopups: ->
 		$('.leaflet-popup-content-wrapper')

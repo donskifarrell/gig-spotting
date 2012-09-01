@@ -14,17 +14,18 @@ window.GigSpotting =
     gigs.add({
       artist: 'Radiohead'
       location: 'London'
-      markerLocation: [51.505, -0.09]
+      markerLocation: ["51.505", "-0.09"]
     })
     gigs.add({
       artist: 'Blur'
       location: 'Belfast'
       details: 'mancs'
-      markerLocation: [51.505, -0.01]
+      markerLocation: ["51.505", "-0.01"]
     })
     gigs.add({
       location: 'Belfast'
       details: 'maaaaa'
+      markerLocation: ["51.505", "-0.02"]
     })
 
     # Views
