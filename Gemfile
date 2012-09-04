@@ -29,7 +29,7 @@ gem 'json'
 gem 'httparty'
 
 # songkick api
-gem 'songkickr'
+gem "songkick_ruby", "~> 1.2.3"
 
 group :test do
   gem "rspec"
