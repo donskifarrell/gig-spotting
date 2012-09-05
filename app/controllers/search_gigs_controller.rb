@@ -1,6 +1,5 @@
 require 'logger'
 require 'songkick'
-require 'pp'
 
 class SearchGigsController < ApplicationController
 	$log = Logger.new("/home/donski/dev/gig-spotting/log.txt")

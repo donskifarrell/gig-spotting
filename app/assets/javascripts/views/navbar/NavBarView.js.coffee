@@ -1,6 +1,11 @@
 class GigSpotting.Views.NavBarView extends Backbone.View
-	tagName: "div"
-	className: "navbar"
-		
+
+	events:
+		"submit": "searchGigs"
+
 	initialize: ->
 		$('.srchDate').datepicker()
+
+	searchGigs: (e) ->
+		e.preventDefault()		
+		console.log("seara")

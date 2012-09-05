@@ -31,7 +31,7 @@ window.GigSpotting =
     # Views
     new GigSpotting.Views.MapView({ model: map })
     new GigSpotting.Views.GigsView({ model: map, collection: gigs })
-    new GigSpotting.Views.NavBarView
+    new GigSpotting.Views.NavBarView({ el: $("#search_gigs")})
 
 $(document).ready ->
   GigSpotting.init()
