@@ -21,7 +21,11 @@
 		<div class="navbar-inner">
 			<a class="brand" href="#"> Gig-Spotting</a>
 			<ul class="nav">
-				<%= form_tag @index, :action => '/search', :remote => true, :method => :get, :class => "navbar-form pull-left" do %>
+				<%= form_tag url_for(:controller => 'search_gigs', :action => 'search'), 
+							:remote => true, 
+							:method => :get, 
+							:id => "search_gigs", 
+							:class => "navbar-form pull-left" do %>
 			        <%= text_field_tag :artist, 
 			                            params[:artist], 
 			                            :class => 'span2', 
@@ -41,10 +45,10 @@
 			                            :id => 'srchToDate',
 			                            :placeholder => "Date..." %>
 			        <%= submit_tag  "",
-			                        :id => 'searchbtn', 
-			                        :name => nil, 
-			                        :value => 'Search', 
-			                        :class => 'btn submittable'%>  
+				                        :id => 'searchbtn', 
+				                        :name => nil, 
+				                        :value => 'Search', 
+				                        :class => 'btn submittable'%>  
 			    <% end %>
 			</ul>
 		</div>

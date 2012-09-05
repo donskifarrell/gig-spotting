@@ -10,9 +10,8 @@ class Gig
 
 	def as_json(options={})
 	{
-		:artist       => self.artist,
-		:lat         => self.lat,
-		:lng        => self.lng
+		:artist       	=> self.artist,
+		:markerLocation	=> [self.lat, self.lng] 
 	}
 	end
 
