@@ -3,15 +3,13 @@ class GigSpotting.Views.GigsView extends Backbone.View
 
 	initialize: ->
 		_.bindAll(this)
-		this.collection.bind('reset', this.render)
+		this.collection.bind('reset', this.reset)
 		this.render()
 
 	render: ->
-		@self = this
-		this.collection.each(this.addGigMarker)
-
-	addGigMarker: (gig) =>
-		this.model.get('leafMap').addLayer(this.generateMarker(gig))
+		gigs = (this.generateMarker(gig) for gig in this.collection.models)
+		this.gigsLayerGroup = L.layerGroup(this.gigs)
+		this.model.get('leafMap').addLayer(this.gigsLayerGroup)
 
 	generateMarker: (gig) ->
 		gigRender =  new GigSpotting.Views.GigView({model: gig}).render()
@@ -20,3 +18,7 @@ class GigSpotting.Views.GigsView extends Backbone.View
 			.bindPopup(gigRender)
 			.on('mouseover', -> marker.openPopup())
 		return marker
+
+	reset: ->
+		this.gigsLayerGroup.clearLayers()
+		this.render()
