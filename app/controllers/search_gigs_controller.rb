@@ -16,7 +16,7 @@ class SearchGigsController < ApplicationController
 				:location => params[:location],
 				:date => params[:date]
 			).save
-			$log.info "Searching for artist: " + params[:artist]
+			$log.info " - Searching for artist: " + params[:artist]
 			results = $songkick.search_artists(params[:artist])
 
 			artistList = getArtistList(results)
@@ -24,11 +24,11 @@ class SearchGigsController < ApplicationController
 
 			# Assume index 0 is matching artist for now
 			displayName = getAttributeValue(artistList[0], 'displayName')
-			$log.info 'Display Name: ' + displayName.inspect
+			$log.info ' - Display Name: ' + displayName.inspect
 
 			links = getAttributeValue(artistList[0], 'identifier')
 			mbid = getAttributeValue(links[0], 'mbid')
-			$log.info 'mbid: ' + mbid.inspect
+			$log.info ' - mbid: ' + mbid.inspect
 
 
 
@@ -36,7 +36,7 @@ class SearchGigsController < ApplicationController
 			#$log.info 'Events: ' + events.inspect
 
 			eventList = getEventList(events)
-			$log.info 'Event List: ' + eventList.inspect
+			#$log.info 'Event List: ' + eventList.inspect
 
 			location = getAttributeValue(eventList[0], 'location')
 			lat = location['lat']
@@ -49,7 +49,7 @@ class SearchGigsController < ApplicationController
 			)
 			@gig.save
 
-			$log.info 'Gig info: ' + @gig.to_json
+			$log.info ' - Gig info: ' + @gig.to_json
 		else
 			@gig = Gig.new(
 				:artist => "Dummy"

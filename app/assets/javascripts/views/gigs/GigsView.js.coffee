@@ -8,7 +8,7 @@ class GigSpotting.Views.GigsView extends Backbone.View
 
 	render: ->
 		gigs = (this.generateMarker(gig) for gig in this.collection.models)
-		this.gigsLayerGroup = L.layerGroup(this.gigs)
+		this.gigsLayerGroup = L.layerGroup(gigs)
 		this.model.get('leafMap').addLayer(this.gigsLayerGroup)
 
 	generateMarker: (gig) ->
