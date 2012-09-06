@@ -1,5 +1,6 @@
 class GigSpotting.Collections.Gigs extends Backbone.Collection
 	model: GigSpotting.Models.Gig
+	url: '/search'
 
 	initialize: ->
 		this.on('add', this.onAdd)

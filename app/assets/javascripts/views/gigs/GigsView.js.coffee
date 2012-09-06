@@ -1,11 +1,9 @@
 class GigSpotting.Views.GigsView extends Backbone.View
 	el: '.leaflet-popup-pane'
-	
-	events:
-		"click": "open"
 
 	initialize: ->
-		_(this).bindAll('add');
+		_.bindAll(this)
+		this.collection.bind('reset', this.render)
 		this.render()
 
 	render: ->
@@ -22,10 +20,3 @@ class GigSpotting.Views.GigsView extends Backbone.View
 			.bindPopup(gigRender)
 			.on('mouseover', -> marker.openPopup())
 		return marker
-
-	add: (model) ->
-		alert "Addededeed"
-		this.render()
-
-	open: ->
-		alert "Open"

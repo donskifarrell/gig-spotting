@@ -16,7 +16,7 @@ class GigSpotting.Views.MapView extends Backbone.View
 			attribution: 'Map data &copy; <a href="http://openstreetmap.org">OpenStreetMap</a> contributors, <a href="http://creativecommons.org/licenses/by-sa/2.0/">CC-BY-SA</a>, Imagery © <a href="http://cloudmade.com">CloudMade</a>[…]',
 			maxZoom: 18
 		})
-		london = new L.LatLng(51.505, -0.09)
+		london = new L.LatLng(51.540, -0.09)
 		leafmap.setView(london, 13).addLayer(tiling)
 		leafmap.on('popupopen', this.styleMarkerPopups)
 		#leafmap.addLayer(new L.Marker(["51.528" , "-0.13"]))
