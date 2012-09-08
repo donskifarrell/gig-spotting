@@ -65,17 +65,6 @@ class SearchGigsController < ApplicationController
 		return mbids
 	end
 
-=begin
-		return = {
-			artist: 'No Artist'
-			gigName: 'This is a dummy gig - it\'s not real!'
-			location: ["51.505", "-0.09"]
-			date: '1/1/2013'
-			matchRating: 'not sure if to be used. Maybe only direct match for triggering a visual clue.'
-			details: 'This is a dummy gig - it\'s not real! So there are no details.'
-			suportingActs: []
-		}
-=end
 	def getEventDetails(artistName, events)
 		eventDetails = []
 		events.each do |event|

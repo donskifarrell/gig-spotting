@@ -1,6 +1,7 @@
 <div id="gigMarker">
-	<div class="popart"><img class="popimg" src="<%= @imgsrc %>"><img></div>
-	<div class="poptxt"><b><%= @displayName %><b></div>
-	<div class="poptxt"><%= @date %></div>
+	<div class="poptxt"><b><%- @.get('artist') %><b></div>
+	<div class="popart"><img class="popimg" src="<%- @.get('imgSrc') %>"><img></div>
+	<div class="poptxt"><b><%- @formatGigName(@.get('gigName')) %><b></div>
+	<div class="poptxt"><%- @.get('date') %></div>
 	<div class="poptxt"><b>Click for more detail</b></div>
 </div>

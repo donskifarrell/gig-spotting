@@ -10,7 +10,7 @@ class GigSpotting.Views.GigsView extends Backbone.View
 	render: ->
 		if this.collection.models == undefined then return
 		gigs = (this.generateMarker(gig) for gig in this.collection.models)
-		this.gigsLayerGroup = L.layerGroup(this.flatten(gigs))
+		this.gigsLayerGroup = L.layerGroup(gigs)
 		this.model.get('leafMap').addLayer(this.gigsLayerGroup)
 
 	generateMarker: (gig) ->
@@ -24,7 +24,3 @@ class GigSpotting.Views.GigsView extends Backbone.View
 	reset: ->
 		this.gigsLayerGroup.clearLayers()
 		this.render()
-
-	flatten: (a) ->
-	    if a.length is 0 then return []
-	    a.reduce (lhs, rhs) -> lhs.concat rhs

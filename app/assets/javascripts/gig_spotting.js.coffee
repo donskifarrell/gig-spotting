@@ -9,7 +9,7 @@ window.GigSpotting =
     gig = new GigSpotting.Models.Gig
 
     # Collections
-    gigs = new GigSpotting.Collections.Gigs({ model: gig })
+    gigs = new GigSpotting.Collections.Gigs()
 
     # Views
     new GigSpotting.Views.MapView({ model: map })
