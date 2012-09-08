@@ -28,13 +28,10 @@ class SearchGigsController < ApplicationController
 				artistEvents = getArtistEvents(artist)
 				next if artistEvents.nil?
 
-				# need to better format output
-				$gigs << { 
-					'artistName' => artistName,
-					'events' => getEventDetails(artistEvents)
-				}
+				$gigs << getEventDetails(artistName, artistEvents)
 			end
 
+			$gigs = $gigs.flatten(1)
 			$log.info ' - Gigs: ' + $gigs.inspect
 		end
 
@@ -68,23 +65,49 @@ class SearchGigsController < ApplicationController
 		return mbids
 	end
 
-	def getEventDetails(events)
+=begin
+		return = {
+			artist: 'No Artist'
+			gigName: 'This is a dummy gig - it\'s not real!'
+			location: ["51.505", "-0.09"]
+			date: '1/1/2013'
+			matchRating: 'not sure if to be used. Maybe only direct match for triggering a visual clue.'
+			details: 'This is a dummy gig - it\'s not real! So there are no details.'
+			suportingActs: []
+		}
+=end
+	def getEventDetails(artistName, events)
 		eventDetails = []
 		events.each do |event|
-			eventDetail = 
+			eventDetails << 
 				{
-					'displayName' => event['displayName'],
-					'markerLocation' => [ 
+					'artist' => artistName,
+					'gigName' => event['displayName'],
+					'location' => [ 
 						event['location']['lat'].to_s(), 
 						event['location']['lng'].to_s() 
-					]
+					],
+					'date' => event['start']['date'],
+					'matchRating' => 'matchRating',
+					'details' => 'Gig Details',
+					'suportingActs' => getSupportingActs(artistName, event['performance'])
 				}
-
-			$log.info ' ---- Event: ' + eventDetail.to_json
-			eventDetails << eventDetail
 		end
+		$log.info ' ---- Event Details: ' + eventDetails.to_json
 		return eventDetails
 	end
+
+	def getSupportingActs(artistName, acts)
+		supportingActs = []
+		acts.each do |act|	
+			if act['displayName'] != artistName
+				supportingActs << {
+					'name' => act['displayName']
+				}
+			end
+		end
+		return supportingActs
+	end	
 
 	def getArtists(resultSet)
 		artistSet = resultSet['resultsPage']['results']['artist']		

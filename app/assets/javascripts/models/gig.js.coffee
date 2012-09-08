@@ -1,10 +1,13 @@
 class GigSpotting.Models.Gig extends Backbone.Model
 	default:
 		{
-			artist: 'Bjork'
-			displayName: 'A really really good gig somewhere (a date)'
-			markerLocation: ["51.505", "-0.09"]
-			details: 'A crazy mofo'
+			artist: 'No Artist'
+			gigName: 'This is a dummy gig - it\'s not real!'
+			location: ["51.505", "-0.09"]
+			date: '1/1/2013'
+			matchRating: 'not sure if to be used. Maybe only direct match for triggering a visual clue.'
+			details: 'This is a dummy gig - it\'s not real! So there are no details.'
+			suportingActs: []
 		}
 
 	# finds the closest ' ' after 20 characters and splits the string

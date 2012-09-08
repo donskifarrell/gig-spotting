@@ -9,18 +9,13 @@ class GigSpotting.Views.GigsView extends Backbone.View
 
 	render: ->
 		if this.collection.models == undefined then return
-		gigs = (this.generateGigs(artist) for artist in this.collection.models)
+		gigs = (this.generateMarker(gig) for gig in this.collection.models)
 		this.gigsLayerGroup = L.layerGroup(this.flatten(gigs))
 		this.model.get('leafMap').addLayer(this.gigsLayerGroup)
 
-	generateGigs: (artist) ->
-		if artist.get('events') == undefined then return	
-		markers = (this.generateMarker(gig) for gig in artist.get('events'))
-		return markers
-
 	generateMarker: (gig) ->
 		gigRender =  new GigSpotting.Views.GigView({model: gig}).render()
-		marker = new L.Marker(gig.markerLocation)
+		marker = new L.Marker(gig.get('location'))
 		marker
 			.bindPopup(gigRender)
 			.on('mouseover', -> marker.openPopup())
