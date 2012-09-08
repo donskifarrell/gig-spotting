@@ -6,9 +6,10 @@ window.GigSpotting =
   init: -> 
     # Models
     map = new GigSpotting.Models.Map
+    gig = new GigSpotting.Models.Gig
 
     # Collections
-    gigs = new GigSpotting.Collections.Gigs
+    gigs = new GigSpotting.Collections.Gigs({ model: gig })
 
     # Views
     new GigSpotting.Views.MapView({ model: map })

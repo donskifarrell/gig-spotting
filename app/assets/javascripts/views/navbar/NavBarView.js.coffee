@@ -1,5 +1,6 @@
 class GigSpotting.Views.NavBarView extends Backbone.View
-
+	collection: GigSpotting.Collections.Gigs
+	
 	events:
 		"submit": "searchGigs"
 

@@ -1,5 +1,6 @@
 class GigSpotting.Views.GigsView extends Backbone.View
 	el: '.leaflet-popup-pane'
+	collection: GigSpotting.Collections.Gigs
 
 	initialize: ->
 		_.bindAll(this)
@@ -7,11 +8,13 @@ class GigSpotting.Views.GigsView extends Backbone.View
 		this.render()
 
 	render: ->
+		if this.collection.models == undefined then return
 		gigs = (this.generateGigs(artist) for artist in this.collection.models)
-		this.gigsLayerGroup = L.layerGroup(flatten(gigs))
+		this.gigsLayerGroup = L.layerGroup(this.flatten(gigs))
 		this.model.get('leafMap').addLayer(this.gigsLayerGroup)
 
-	generateGigs: (artist) ->		
+	generateGigs: (artist) ->
+		if artist.get('events') == undefined then return	
 		markers = (this.generateMarker(gig) for gig in artist.get('events'))
 		return markers
 
@@ -27,6 +30,6 @@ class GigSpotting.Views.GigsView extends Backbone.View
 		this.gigsLayerGroup.clearLayers()
 		this.render()
 
-	flatten = (a) ->
+	flatten: (a) ->
 	    if a.length is 0 then return []
 	    a.reduce (lhs, rhs) -> lhs.concat rhs
