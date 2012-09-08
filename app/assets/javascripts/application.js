@@ -17,6 +17,7 @@
 //= require backbone
 //
 //= require bootstrap-datepicker
+// require leaflet-src
 //
 //= require .//gig_spotting
 //

@@ -2,7 +2,7 @@ class GigSpotting.Views.GigView extends Backbone.View
 	template: JST['gigs/index']
 
 	render: ->
-		return this.template(this.model.toJSON())
+		return this.template(this.model)
 
 	addGig: (newGig) ->
 		gig = new GigSpotting.Views.GigsIndex({model: newGig})

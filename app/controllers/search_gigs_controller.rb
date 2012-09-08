@@ -75,8 +75,8 @@ class SearchGigsController < ApplicationController
 				{
 					'displayName' => event['displayName'],
 					'markerLocation' => [ 
-						event['location']['lat'], 
-						event['location']['lng'] 
+						event['location']['lat'].to_s(), 
+						event['location']['lng'].to_s() 
 					]
 				}
 
