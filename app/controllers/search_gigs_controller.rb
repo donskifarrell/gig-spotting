@@ -1,15 +1,18 @@
 require 'logger'
 require 'songkick'
+require 'echonest'
 
 class SearchGigsController < ApplicationController
 	$log = Logger.new("/home/donski/dev/gig-spotting/log.txt")
 	$songkick = Songkick.new("zUTcTZnxJaPNYxrd")
+	$echo = Echonest::Api.new("LTTNLEA1WOX7IP2HX")
 
 	# GET /search
 	# GET /search.json
 	def search
 		$log.info "SearchGigsController -> Index"
 		$gigs = []
+		$artists = []
 
 		if params.include? :artist 
 			@search = Search.new(
@@ -18,7 +21,9 @@ class SearchGigsController < ApplicationController
 				:date => params[:date]
 			).save
 
-			$log.info " - Searching for artist: " + params[:artist]
+			$artists.push params[:artist]
+			$artists.push *getSimilarArtists(params[:artist])
+			$log.info " - Searching for artists: " + $artists.inspect
 			searchResults = $songkick.search_artists(params[:artist])
 
 			artists = getArtists(searchResults)
@@ -108,5 +113,17 @@ class SearchGigsController < ApplicationController
 		eventsSet = resultSet['resultsPage']['results']['event']		
 		#$log.info ' --- Events: ' + eventsSet.inspect
 		return eventsSet
+	end
+
+	def getSimilarArtists(artistName)
+		similarArtists = []
+		artist = Echonest::ApiMethods::Artist.new($echo)
+		artist.artist_name = artistName
+		artists = artist.send(:similar)
+		artists['artists'].each do |artist|
+			#$log.info ' - Similar Artist: ' + artist['name']
+			similarArtists << artist['name']
+		end
+		return similarArtists
 	end
 end
