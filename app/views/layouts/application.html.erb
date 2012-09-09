@@ -35,21 +35,14 @@
 			                            params[:location], 
 			                            :class => 'span2', 
 			                            :placeholder => "Location..."%>
-			        From: <%= text_field_tag :date, 
-			                            params[:date], 
-			                            :class => 'span2 srchDate', 
-			                            :id => 'srchFromDate',
-			                            :placeholder => "Date..." %>
-			        To: <%= text_field_tag :date, 
-			                            params[:date], 
-			                            :class => 'span2 srchDate', 
-			                            :id => 'srchToDate',
-			                            :placeholder => "Date..." %>
+			        <%= select_tag(:radius, 
+				        			options_for_select(@distances), 
+				        			:class => "span2") %>
 			        <%= submit_tag  "",
-				                        :id => 'searchbtn', 
-				                        :name => nil, 
-				                        :value => 'Search', 
-				                        :class => 'btn submittable'%>  
+			                        :id => 'searchbtn', 
+			                        :name => nil, 
+			                        :value => 'Search', 
+			                        :class => 'btn submittable'%>  
 			    <% end %>
 			</ul>
 		</div>

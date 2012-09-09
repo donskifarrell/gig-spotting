@@ -10,7 +10,7 @@ class SearchGigsController < ApplicationController
 
 	# GET /search
 	# GET /search.json
-	def search
+	def search	
 		$log.info "SearchGigsController -> Index"
 		gigs = []
 		artistNames = []
@@ -19,7 +19,7 @@ class SearchGigsController < ApplicationController
 			@search = Search.new(
 				:artist => params[:artist],
 				:location => params[:location],
-				:date => params[:date]
+				:radius => params[:radius]
 			).save
 
 			artistNames.push params[:artist]
@@ -27,7 +27,6 @@ class SearchGigsController < ApplicationController
 			gigs.push *getGigs(artistNames)
 			#$log.info ' - Gigs Found: ' + gigs.inspect
 		end
-
 		respond_to do |format|
 			format.json  {
 				render :json => gigs.to_json

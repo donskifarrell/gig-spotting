@@ -7,5 +7,6 @@ class HomeController < ApplicationController
 	# GET /index.json
 	def index
 		$log.info "HomeController -> Index"
+		@distances = {'1 Mile' => 1, '10 Miles' => 2, 'The World' => 3}
 	end
 end

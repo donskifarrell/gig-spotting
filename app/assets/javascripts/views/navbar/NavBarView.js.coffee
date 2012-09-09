@@ -5,7 +5,7 @@ class GigSpotting.Views.NavBarView extends Backbone.View
 		"submit": "searchGigs"
 
 	initialize: ->
-		$('.srchDate').datepicker()
+		$("#radius").combobox()
 
 	searchGigs: (e) ->
 		console.log("search..")

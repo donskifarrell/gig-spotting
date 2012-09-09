@@ -3,7 +3,6 @@ class Search
 
   key :artist, String
   key :location, String
-  key :dateFrom, String
-  key :dateTo, String
+  key :radius, String
 
 end

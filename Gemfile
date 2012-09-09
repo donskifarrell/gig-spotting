@@ -1,8 +1,6 @@
 source 'https://rubygems.org'
 
-gem 'rails', '3.2.2.rc1'
-gem 'geokit'
-gem 'bassnode-ruby-echonest'
+gem 'rails'
 
 # Bundle edge Rails instead:
 # gem 'rails', :git => 'git://github.com/rails/rails.git'
@@ -33,6 +31,12 @@ gem 'httparty'
 # songkick api
 gem "songkick_ruby", "~> 1.2.3"
 
+# EchoNest api
+gem 'bassnode-ruby-echonest'
+
+# Geo-encoder Geokit
+gem 'geokit'
+
 group :test do
   gem "rspec"
   gem "rspec-rails"
@@ -47,7 +51,7 @@ end
 # gem 'jbuilder'
 
 # Use unicorn as the app server
-# gem 'unicorn'
+gem 'unicorn'
 
 # Deploy with Capistrano
 # gem 'capistrano'
