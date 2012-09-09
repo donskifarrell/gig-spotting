@@ -12,7 +12,7 @@ class SearchGigsController < ApplicationController
 	def search
 		$log.info "SearchGigsController -> Index"
 		$gigs = []
-		$artists = []
+		$artistNames = []
 
 		if params.include? :artist 
 			@search = Search.new(
@@ -21,23 +21,10 @@ class SearchGigsController < ApplicationController
 				:date => params[:date]
 			).save
 
-			$artists.push params[:artist]
-			$artists.push *getSimilarArtists(params[:artist])
-			$log.info " - Searching for artists: " + $artists.inspect
-			searchResults = $songkick.search_artists(params[:artist])
-
-			artists = getArtists(searchResults)
-			artists.each do |artist|
-				artistName = artist['displayName']
-				$log.info ' -- Artist Name: ' + artistName.inspect
-				artistEvents = getArtistEvents(artist)
-				next if artistEvents.nil?
-
-				$gigs << getEventDetails(artistName, artistEvents)
-			end
-
-			$gigs = $gigs.flatten(1)
-			$log.info ' - Gigs: ' + $gigs.inspect
+			$artistNames.push params[:artist]
+			$artistNames.push *getSimilarArtists(params[:artist])
+			$gigs.push *getGigs($artistNames)
+			$log.info ' - Gigs Found: ' + $gigs.inspect
 		end
 
 		respond_to do |format|
@@ -47,9 +34,41 @@ class SearchGigsController < ApplicationController
 		end 
 	end
 
+	def getSimilarArtists(artistName)
+		similarArtists = []
+		artist = Echonest::ApiMethods::Artist.new($echo)
+		artist.artist_name = artistName
+		artists = artist.send(:similar)
+		artists['artists'].each do |artist|
+			#$log.info ' - Similar Artist: ' + artist['name']
+			similarArtists << artist['name']
+		end
+		return similarArtists
+	end
+
+	def getGigs(artistNames)
+		gigs = []
+		$log.info " - Searching for artists: " + $artistNames.inspect
+		artistNames.each do |artistName|
+			resultSet = $songkick.search_artists(artistName)
+			next if resultSet.nil?
+
+			artists = resultSet['resultsPage']['results']['artist']
+			artists.each do |artist|
+				name = artist['displayName']
+				$log.info ' -- Artist Name: ' + name.inspect
+				artistEvents = getArtistEvents(artist)
+				next if artistEvents.nil?
+
+				gigs.push *buildEventDetails(name, artistEvents)
+			end
+		end
+		return gigs
+	end
+
 	def getArtistEvents(artist)
 		# It appears that all event links for an artist produce the same calendar,
-		# so we only really need the first one.
+		# so we only really need the first one. (But what if there are none!)
 		eventLink = getArtistEventLinks(artist)[0]
 		if eventLink.nil?		
 			$log.info ' --- Event mbid NIL'
@@ -59,18 +78,18 @@ class SearchGigsController < ApplicationController
 		$log.info ' --- Event mbid: ' + eventLink
 
 		eventResults = $songkick.artist_calendar('mbid:' + eventLink)
-		return getEvents(eventResults)
+		return eventResults['resultsPage']['results']['event']
 	end
 
 	def getArtistEventLinks(artist)
-		mbids = Array.new
+		mbids = []
 		artist['identifier'].each do |link|
 			mbids << link['mbid']
 		end
 		return mbids
 	end
 
-	def getEventDetails(artistName, events)
+	def buildEventDetails(artistName, events)
 		eventDetails = []
 		events.each do |event|
 			eventDetails << 
@@ -87,7 +106,7 @@ class SearchGigsController < ApplicationController
 					'suportingActs' => getSupportingActs(artistName, event['performance'])
 				}
 		end
-		$log.info ' ---- Event Details: ' + eventDetails.to_json
+		#$log.info ' ---- Event Details: ' + eventDetails.to_json
 		return eventDetails
 	end
 
@@ -102,28 +121,4 @@ class SearchGigsController < ApplicationController
 		end
 		return supportingActs
 	end	
-
-	def getArtists(resultSet)
-		artistSet = resultSet['resultsPage']['results']['artist']		
-		#$log.info ' --- Artists: ' + artistSet.inspect
-		return artistSet
-	end	
-
-	def getEvents(resultSet)
-		eventsSet = resultSet['resultsPage']['results']['event']		
-		#$log.info ' --- Events: ' + eventsSet.inspect
-		return eventsSet
-	end
-
-	def getSimilarArtists(artistName)
-		similarArtists = []
-		artist = Echonest::ApiMethods::Artist.new($echo)
-		artist.artist_name = artistName
-		artists = artist.send(:similar)
-		artists['artists'].each do |artist|
-			#$log.info ' - Similar Artist: ' + artist['name']
-			similarArtists << artist['name']
-		end
-		return similarArtists
-	end
 end
