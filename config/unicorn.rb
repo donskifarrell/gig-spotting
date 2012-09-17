@@ -5,5 +5,5 @@ else
 end
 
 listen port, :tcp_nopush => false
-worker_processes 4 # amount of unicorn workers to spin up
+worker_processes 1 # amount of unicorn workers to spin up
 timeout 30         # restarts workers that hang for 30 seconds
