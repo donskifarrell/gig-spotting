@@ -5,6 +5,8 @@ gem 'rails'
 # Bundle edge Rails instead:
 # gem 'rails', :git => 'git://github.com/rails/rails.git'
 
+gem 'twitter-bootstrap-rails'
+
 # Gems used only for assets and not required
 # in production environments by default.
 group :assets do
@@ -15,7 +17,6 @@ group :assets do
   # gem 'therubyracer'
 
   gem 'uglifier', '>= 1.0.3'
-  gem 'twitter-bootstrap-rails'
   gem 'backbone-on-rails'
 end
 
