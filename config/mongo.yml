@@ -12,8 +12,4 @@ test:
 
 # set these environment variables on your prod server
 production:
-  host: <%= MONGO_LAB['host'] %>
-  port: <%= MONGO_LAB['port'] %>
-  database: <%= MONGO_LAB['database'] %>
-  username: <%= MONGO_LAB['username'] %>
-  password: <%= MONGO_LAB['password'] %>
+# Should be set in Heroku config
