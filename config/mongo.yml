@@ -1,6 +1,6 @@
 defaults: &defaults
-  host: 127.45.56.1
-  port: 27010
+  host: 127.0.0.1
+  port: 27017
 
 development:
   <<: *defaults
@@ -9,8 +9,3 @@ development:
 test:
   <<: *defaults
   database: gigspotting_test
-
-# set these environment variables on your prod server
-production:
-  <<: *defaults
-# Should be set in Heroku config
