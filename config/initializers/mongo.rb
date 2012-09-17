@@ -1,14 +1,6 @@
-Rails.logger.info('######################## TESTSSTS!')
-Rails.logger.info('#############')
-Rails.logger.info(Rails.env.production?)
-puts '######################## TESTSSTS!'
-puts '#############'
-puts Rails.env.production?
-
 if Rails.env.production?
 	puts '########################  In production!'
-	puts Rails.env.production?
-	puts Rails.env.production
+	puts ENV['MONGOLAB_URI']
 	MongoMapper.connection = Mongo::Connection.from_uri(ENV['MONGOLAB_URI'])
 	MongoMapper.database = ENV['MONGOLAB_DB']
 else
