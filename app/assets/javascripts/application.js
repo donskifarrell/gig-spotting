@@ -14,9 +14,7 @@
 //= require jquery_ujs
 //= require twitter/bootstrap
 //= require underscore
-//= require backbone
 //
-//= require bootstrap-datepicker
 // require leaflet-src
 //
 //= require .//gig_spotting
