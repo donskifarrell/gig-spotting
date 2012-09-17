@@ -1,4 +1,4 @@
-if Rails.env == 'production'
+if Rails.env.production?
 	MongoMapper.connection = Mongo::Connection.from_uri(ENV['MONGOLAB_URI'])
 	MongoMapper.database = ENV['MONGOLAB_DB']
 else
