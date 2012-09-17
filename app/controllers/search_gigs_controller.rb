@@ -3,7 +3,8 @@ require 'songkick'
 require 'echonest'
 
 class SearchGigsController < ApplicationController
-	$log = Logger.new("/home/donski/dev/gig-spotting/log.txt")
+	#$log = Logger.new("/home/donski/dev/gig-spotting/log.txt")
+	$log = Rails.logger
 	$songkick = Songkick.new("zUTcTZnxJaPNYxrd")
 	$echo = Echonest::Api.new("LTTNLEA1WOX7IP2HX")
 	$gigsFound = []
