@@ -1,6 +1,8 @@
 if Rails.env.production?
 	puts '########################  In production!'
-	puts ENV['MONGOLAB_URI']
+	puts ENV?
+	puts ENV
+	puts '########################  In production!'
 	MongoMapper.connection = Mongo::Connection.from_uri(ENV['MONGOLAB_URI'])
 	MongoMapper.database = ENV['MONGOLAB_DB']
 else
