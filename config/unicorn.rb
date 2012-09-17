@@ -1,4 +1,4 @@
-if Rails.env.production?
+if defined? ENV["PORT"]
 	port = ENV["PORT"].to_i
 else
 	port = 3000
