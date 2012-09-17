@@ -1,8 +1,9 @@
 require 'logger'
 
 class HomeController < ApplicationController
-	$log = Logger.new("/home/donski/dev/gig-spotting/log.txt")
-
+	#$log = Logger.new("/home/donski/dev/gig-spotting/log.txt")
+	$log = Rails.logger
+	
 	# GET /index
 	# GET /index.json
 	def index
