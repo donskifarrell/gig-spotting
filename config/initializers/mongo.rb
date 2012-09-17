@@ -6,6 +6,6 @@ if ENV["RAILS_ENV"] == 'production'
 	MongoMapper.database = ENV['MONGOLAB_DB']
 else
 	Rails.logger.info('########################  Not in production mode!')
-	MongoMapper.connection = Mongo::Connection.new('localhost', 27017)
+	MongoMapper.connection = Mongo::Connection.new('localhost', 27020)
 	MongoMapper.database = "#myapp-#{Rails.env}"
 end
