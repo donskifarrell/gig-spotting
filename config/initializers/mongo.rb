@@ -1,6 +1,8 @@
 Rails.logger.info('######################## TESTSSTS!')
+Rails.logger.info('#############')
+Rails.logger.info(Rails.env.production?)
 
-if ENV["RAILS_ENV"] == 'production'
+if Rails.env.production?
 	Rails.logger.info('########################  In production!')
 	Rails.logger.info(Rails.env.production?)
 	Rails.logger.info(Rails.env.production)
