@@ -12,7 +12,8 @@ test:
 
 # set these environment variables on your prod server
 production:
-  <<: *defaults
-  database: gigspotting
-  username: <%= ENV['MONGO_USERNAME'] %>
-  password: <%= ENV['MONGO_PASSWORD'] %>
+  host: <%= MONGO_LAB['host'] %>
+  port: <%= MONGO_LAB['port'] %>
+  database: <%= MONGO_LAB['database'] %>
+  username: <%= MONGO_LAB['username'] %>
+  password: <%= MONGO_LAB['password'] %>

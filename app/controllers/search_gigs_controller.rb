@@ -16,11 +16,12 @@ class SearchGigsController < ApplicationController
 		artistNames = []
 
 		if params.include? :artist 
+
 			@search = Search.new(
-				:artist => params[:artist],
-				:location => params[:location],
-				:radius => params[:radius]
-			).save
+							:artist => params[:artist],
+							:location => params[:location],
+							:radius => params[:radius]
+						).save
 
 			artistNames.push params[:artist]
 			artistNames.push *getSimilarArtists(params[:artist])
