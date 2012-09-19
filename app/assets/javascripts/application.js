@@ -14,6 +14,7 @@
 //= require jquery_ujs
 //= require twitter/bootstrap
 //= require underscore
+//= require backbone
 //
 // require leaflet-src
 //
