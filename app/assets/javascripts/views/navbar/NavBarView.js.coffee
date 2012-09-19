@@ -4,9 +4,6 @@ class GigSpotting.Views.NavBarView extends Backbone.View
 	events:
 		"submit": "searchGigs"
 
-	initialize: ->
-		$("#radius").combobox()
-
 	searchGigs: (e) ->
 		console.log("search..")
 		this.collection.fetch({ data: $(e.currentTarget).serialize() })
