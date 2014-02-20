@@ -1,3 +1,11 @@
-== gig-spotting
+## gig-spotting
 
-app that puts gigs on the map
+An app that puts gigs on the map
+
+Alpha at http://www.gigspotting.co.uk/
+
+My inital attempt to learn the basics of ruby.
+
+It utilises the Songkick API to gather artists and locations.
+
+Currently unoptimised so very slow to merge all searches.
